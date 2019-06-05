@@ -1,0 +1,17 @@
+.input-group {
+    margin-top: 10px
+}
+
+input.ng-touched.ng-invalid, 
+input.ng-dirty.ng-invalid {
+    border: 2px solid red;
+}
+
+input.ng-touched.ng-invalid,
+textarea.ng-dirty.ng-invalid {
+    border: 2px solid red;
+}
+
+small {
+    color: red;
+}

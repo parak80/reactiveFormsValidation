@@ -1,0 +1,31 @@
+<form [formGroup]="form">
+    <div *ngIf="template && detail">
+        <div *ngFor="let ctrl of this.template.properties | keyvalue" >          
+            <div [ngSwitch]="ctrl.value.type" id="dynamicControl" class="detailForm">
+              <div class="input-group">
+                <label class="col-sm-3" for="{{ctrl.key}}">{{ctrl.value.label}}</label>
+                <div class="col-sm-9">
+                  <input *ngSwitchCase="'text'"  
+                    appEditor [editMode]="editMode" class="form-control" type="text" [formControlName]="ctrl.key"/>
+                  <textarea *ngSwitchCase="'textarea'" 
+                    appEditor [editMode]="editMode" class="form-control" type="textarea" [formControlName]="ctrl.key" formControlName="textarea">
+                  </textarea>
+                  <select *ngSwitchCase="'select-user'" 
+                    appEditor [editMode]="editMode" class="form-control" type="select" [formControlName]="ctrl.key">
+                    <option *ngFor="let o of users" [ngValue]="o.id" 
+                    [attr.disabled] = "o.passive === true ? 'disabled' : null">{{o.display}}</option>
+                  </select>
+                  <select *ngSwitchCase="'select-department'" 
+                    appEditor [editMode]="editMode" class="form-control" type="select" [formControlName]="ctrl.key">
+                    <option *ngFor="let o of departments" [ngValue]="o.id" 
+                    [attr.disabled] = "o.passive === true ? 'disabled' : null" >{{o.display}}</option>
+                  </select>
+                  <div *ngIf="f[ctrl.key].errors && (f[ctrl.key].dirty || f[ctrl.key].touched )">
+                      <small *ngFor="let e of f[ctrl.key].errors | keyvalue">{{ctrl.value.validators[e.key]?.message}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </form>

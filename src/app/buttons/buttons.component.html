@@ -1,0 +1,11 @@
+<div *ngIf="data">
+  <button *ngFor="let b of buttons" type="button"
+    [attr.hidden]="!b.visibleFn || b.visibleFn(data) ? null : 'hidden'" 
+    [attr.disabled]="!b.enabledFn || b.enabledFn(data) ? null : 'disabled'"
+    class="btn btn-secondary" 
+    (click)="b.callbackFn(data)"
+    formControlName="notification">
+    <i *ngIf="b.iconClass" class="fas" [ngClass]="b.iconClass"></i>
+    {{b.label}}
+  </button>
+</div>

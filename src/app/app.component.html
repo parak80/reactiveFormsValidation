@@ -1,0 +1,21 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<ng-progress [color]="'#437ece'" [spinner]="false" [thick]="true"></ng-progress>
+<div class="container">
+  <form class="top-margin" >
+    <div class="input-group">
+      <label for="select-document" class="col-sm-3">Välj dokument</label>
+      <select id="select-document" name="select-document" type="select" 
+        class="form-control col-sm-9" [(ngModel)]="selectedId" (change)="onSelectedId($event.target.value)">
+        <option *ngFor="let d of documents$ | async" [value]="d.id">{{d.description}}</option>
+      </select>
+    </div>
+  </form>
+  <app-buttons [data]="document$ | async" [buttons]="buttons"></app-buttons>
+  <app-details #details 
+    [detail]="document$ | async" 
+    [template]="template" 
+    [editMode]="editMode" 
+    (valueUpdated)="onValueUpdated($event)">
+  </app-details>
+</div>
+
